@@ -3,7 +3,7 @@ package com.example.bethn.gfree_srproj;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class addRestaurant extends AppCompatActivity {
+public class AddRestaurant extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
