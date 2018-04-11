@@ -9,17 +9,32 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioButton;
 
 /**
  * Created by bethn on 3/30/2018.
  */
 
 public class MainFragment extends Fragment {
+    private RadioButton currLocSearch;
+    private RadioButton zipSearch;
+    private RadioButton currLocAdd;
+    private RadioButton byNameAdd;
+    private EditText zipSearchLoc;
+    private EditText zipAddLoc;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.main_fragment, container, false);
+
+        currLocSearch = (RadioButton) view.findViewById(R.id.searchCurrLocRadioButton);
+        zipSearch = (RadioButton) view.findViewById(R.id.searchZipRadioButton);
+        currLocAdd = (RadioButton) view.findViewById(R.id.addCurrLocRadioButton);
+        byNameAdd = (RadioButton) view.findViewById(R.id.addByNameRadioButton);
+        zipSearchLoc = (EditText) view.findViewById(R.id.zipSearchEditText);
+        zipAddLoc = (EditText) view.findViewById(R.id.zipAddEditText);
 
         Button addButton = (Button) view.findViewById(R.id.addButton);
 
@@ -29,7 +44,7 @@ public class MainFragment extends Fragment {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainFragment.this.getActivity(), AddRestaurant.class));
+                startActivity(new Intent(MainFragment.this.getActivity(), AddActivity.class));
             }
         });
 

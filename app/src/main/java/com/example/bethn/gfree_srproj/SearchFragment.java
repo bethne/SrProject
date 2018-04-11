@@ -48,11 +48,12 @@ public class SearchFragment extends Fragment {
 
                 for(Restaurant restaurant : data.makeStuff()){
 
-                    if(restaurant.getName().contains(s)){
+                    if(restaurant.getName().toLowerCase().contains(s.toString().toLowerCase())){
                         filteredRestaurants.add(restaurant);
                     }
                 }
                 rAdapter.setRestaurants(filteredRestaurants);
+                rAdapter.notifyDataSetChanged();
             }
 
             @Override

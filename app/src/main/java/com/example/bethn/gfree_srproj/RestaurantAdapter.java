@@ -48,7 +48,6 @@ public class RestaurantAdapter extends ArrayAdapter {
         TextView restaurantName = (TextView) view.findViewById(R.id.restaurant_name);
         restaurantName.setText(restaurants.get(position).getName());
 
-
         return view;
     }
 }
