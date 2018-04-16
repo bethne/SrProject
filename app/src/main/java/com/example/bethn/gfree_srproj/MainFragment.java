@@ -5,6 +5,8 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -92,6 +94,7 @@ public class MainFragment extends Fragment {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if(byNameAdd.isChecked()){
+                    nameAddLoc.setEnabled(false);
                     nameAddLoc.setHint("Restaurant Name");
                     nameAddLoc.setEnabled(true);
                    //onTextChange to enable addbutton
@@ -124,7 +127,7 @@ public class MainFragment extends Fragment {
                 if(zipSearch.isChecked()){
                     zipSearchLoc.setHint("zip code");
                     zipSearchLoc.setEnabled(true);
-                    //on textChange to enable searchbutton
+                    searchButton.setEnabled(false);
                 }
                 else{
                     zipSearchLoc.setEnabled(false);
@@ -134,9 +137,46 @@ public class MainFragment extends Fragment {
 
             }
         });
+
+        zipSearchLoc.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                searchButton.setEnabled(s != null && s.length() == 5);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        nameAddLoc.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                addButton.setEnabled(s != null && nameAddLoc.getText().length() != 0);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String name = nameAddLoc.getText().toString();
+                AppSession appSession = AppSession.getInstance();
+                appSession.setName(name);
                 startActivity(new Intent(MainFragment.this.getActivity(), SearchActivity.class));
             }
         });

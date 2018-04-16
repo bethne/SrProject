@@ -9,7 +9,7 @@ import java.util.List;
  * Created by bethn on 3/25/2018.
  */
 
-public abstract class Restaurant implements Parcelable{
+public class Restaurant implements Parcelable{
     private String name;
     private String address;
     private String phone;
@@ -47,6 +47,33 @@ public abstract class Restaurant implements Parcelable{
         //this.priceRange = data[5];
        // this.foodType = data[6];
 
+    }
+
+    public static final Creator<Restaurant> CREATOR = new Creator<Restaurant>() {
+        @Override
+        public Restaurant createFromParcel(Parcel in) {
+            return new Restaurant(in);
+        }
+
+        @Override
+        public Restaurant[] newArray(int size) {
+            return new Restaurant[size];
+        }
+    };
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
+        dest.writeString(name);
+        dest.writeString(address);
+        dest.writeString(phone);
+        dest.writeString(type);
+        dest.writeString(hours);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public String getName() {

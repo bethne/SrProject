@@ -23,7 +23,7 @@ import java.util.List;
 public class SearchFragment extends Fragment {
     private EditText searchBox;
     private ListView searchResults;
-    private Singleton data;
+    private AppSession data;
 
     @Nullable
     @Override
@@ -32,7 +32,7 @@ public class SearchFragment extends Fragment {
         searchBox = (EditText) view.findViewById(R.id.search_box);
         searchResults = (ListView) view.findViewById(R.id.search_results);
 
-        data = Singleton.getInstance();
+        data = AppSession.getInstance();
 
         final RestaurantAdapter rAdapter = new RestaurantAdapter(getActivity(),0);
         final List<Restaurant> fullList = data.getList();//returns restaurant list from dataProvider

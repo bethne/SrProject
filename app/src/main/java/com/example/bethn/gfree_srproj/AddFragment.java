@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -14,12 +13,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RatingBar;
-import android.widget.ScrollView;
 import android.widget.Spinner;
-import android.view.View.OnTouchListener;
-import android.widget.RatingBar.OnRatingBarChangeListener;
-import android.widget.Toast;
-import android.content.Intent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,6 +55,8 @@ public class AddFragment extends Fragment {
 
         filtersListView.setAdapter(fAdapter);
 
+        restaurantName.setText(AppSession.getInstance().getName());
+
         Button finishedAdding = (Button) view.findViewById(R.id.doneAddInfoButton);
 
         finishedAdding.setOnClickListener(new View.OnClickListener() {
@@ -72,7 +68,7 @@ public class AddFragment extends Fragment {
                 }
                 else {
                     //add restaurant info from createRestaurant to restaurantList
-                    Singleton.getInstance().getList().add(createRestaurant());
+                    AppSession.getInstance().getList().add(createRestaurant());
 
                     //go back to home screen
                     startActivity(new Intent(AddFragment.this.getActivity(), MainActivity.class));
@@ -81,6 +77,12 @@ public class AddFragment extends Fragment {
             }
         });
 
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                ratingBar.setNumStars(Math.round(rating));
+            }
+        });
         return view;
     }
 

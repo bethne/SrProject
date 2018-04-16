@@ -7,21 +7,23 @@ import java.util.List;
  * Created by bethn on 4/12/2018.
  */
 
-public class Singleton {
+public class AppSession {
 
-    private static Singleton single_instance = null;
+    private static AppSession single_instance = null;
     private List<Restaurant> restaurantList = null;
     private RestaurantDataProvider restaurantDataProvider = new RestaurantDataProvider();
+    private String name;
 
-    public static Singleton getInstance()
+
+    public static AppSession getInstance()
     {
         if (single_instance == null) {
-            single_instance = new Singleton();
+            single_instance = new AppSession();
         }
         return single_instance;
     }
 
-    private Singleton() {
+    private AppSession() {
 
         restaurantList = new ArrayList<Restaurant>();
     }
@@ -33,5 +35,13 @@ public class Singleton {
     //Add element to list
     public void addToRestaurantList(Restaurant restaurant) {
         restaurantList.add(restaurant);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
