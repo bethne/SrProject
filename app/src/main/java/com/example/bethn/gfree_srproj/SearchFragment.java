@@ -1,6 +1,7 @@
 package com.example.bethn.gfree_srproj;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
@@ -8,9 +9,10 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
-
+import android.widget.AdapterView.OnItemClickListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +23,7 @@ import java.util.List;
 public class SearchFragment extends Fragment {
     private EditText searchBox;
     private ListView searchResults;
-    private RestaurantDataProvider data;
+    private Singleton data;
 
     @Nullable
     @Override
@@ -30,10 +32,11 @@ public class SearchFragment extends Fragment {
         searchBox = (EditText) view.findViewById(R.id.search_box);
         searchResults = (ListView) view.findViewById(R.id.search_results);
 
-        data = new RestaurantDataProvider();
+        data = Singleton.getInstance();
 
         final RestaurantAdapter rAdapter = new RestaurantAdapter(getActivity(),0);
-        rAdapter.setRestaurants(data.makeStuff());
+        final List<Restaurant> fullList = data.getList();//returns restaurant list from dataProvider
+        rAdapter.setRestaurants(fullList);
         searchResults.setAdapter(rAdapter);
 
         searchBox.addTextChangedListener(new TextWatcher() {
@@ -46,7 +49,7 @@ public class SearchFragment extends Fragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 List<Restaurant> filteredRestaurants = new ArrayList<>();
 
-                for(Restaurant restaurant : data.makeStuff()){
+                for(Restaurant restaurant : data.getList()){
 
                     if(restaurant.getName().toLowerCase().contains(s.toString().toLowerCase())){
                         filteredRestaurants.add(restaurant);
@@ -61,6 +64,18 @@ public class SearchFragment extends Fragment {
 
             }
         });
+
+        searchResults.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(SearchFragment.this.getActivity(),RestaurantInfoActivity.class);
+                Object clicked = searchResults.getItemAtPosition(position);
+
+               // intent.putExtra("info", clicked);
+                startActivity(intent);
+            }
+        });
+
 
         return view;
     }

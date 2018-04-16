@@ -7,7 +7,7 @@
 
     <ScrollView
         android:id="@+id/scrollView3"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -41,18 +41,7 @@
                 tools:layout_editor_absoluteX="2dp"
                 tools:layout_editor_absoluteY="0dp" />
 
-            <TextView
-                android:id="@+id/textView13"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="75dp"
-                android:paddingLeft="11dp"
-                android:paddingTop="5dp"
-                android:text=" * indicates required"
-                android:textColor="@android:color/holo_red_dark"
-                android:textSize="15sp" />
+
 
             <EditText
                 android:id="@+id/restaurantNameEditText"
@@ -62,7 +51,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="111dp"
                 android:ems="10"
-                android:hint="Restaurant Name"
+                android:hint="Restaurant Name (REQUIRED FIELD)"
                 android:paddingLeft="5dp" />
 
 
@@ -73,7 +62,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/restaurantNameEditText"
                 android:ems="10"
-                android:hint="Address/Zip Code"
+                android:hint="Restaurant Location (REQUIRED FIELD)"
                 android:inputType="textPersonName"
                 android:paddingLeft="5dp" />
 
@@ -96,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/addAddressEditText"
                 android:layout_marginTop="54dp"
-                android:layout_toEndOf="@+id/typeLabel" />
+                android:layout_toEndOf="@+id/filtersLabel" />
 
             <TextView
                 android:id="@+id/ratingLabel"
@@ -131,37 +120,57 @@
                 android:textSize="17sp" />
 
             <TextView
-                android:id="@+id/typeLabel"
+                android:id="@+id/filtersLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/seperateMenuCheckBox"
                 android:layout_below="@+id/seperateMenuCheckBox"
                 android:layout_marginTop="12dp"
                 android:paddingLeft="5dp"
-                android:text="Type"
+                android:text="Filters"
                 android:textColor="@android:color/black"
                 android:textSize="18sp" />
 
+            <LinearLayout
+                android:id="@+id/linear"
+                android:layout_below="@id/filtersLabel"
+                android:layout_width="match_parent"
+                android:layout_height="120dp">
 
-                    <ListView
-                        android:id="@+id/filters_list_view"
-                        android:layout_below="@+id/typeLabel"
+                <ListView
+                    android:id="@+id/filters_list_view"
                     android:layout_width="match_parent"
-                        android:layout_height="60dp"/>
+                    android:layout_height="wrap_content"/>
 
+            </LinearLayout>
 
             <EditText
                 android:id="@+id/itemNameText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/filters_list_view"
+                android:layout_below="@+id/linear"
                 android:ems="10"
                 android:hint="Item Name"
                 android:inputType="textPersonName"
                 android:paddingLeft="5dp"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
+            <EditText
+                android:id="@+id/itemDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/itemNameText"
+                android:hint="Item Descrition"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/doneAddInfoButton"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/itemDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Done" />
 
         </RelativeLayout>
 

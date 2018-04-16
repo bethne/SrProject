@@ -3,12 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/restaurant_name"
+    <FrameLayout
+        android:id="@+id/restaurant_info_fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:text="Sample"
-        android:textSize="30sp" />
+        android:layout_height="match_parent"/>
 
 </android.support.constraint.ConstraintLayout>

@@ -10,7 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 
 /**
  * Created by bethn on 3/30/2018.
@@ -22,32 +25,115 @@ public class MainFragment extends Fragment {
     private RadioButton currLocAdd;
     private RadioButton byNameAdd;
     private EditText zipSearchLoc;
-    private EditText zipAddLoc;
+    private EditText nameAddLoc;
+    private RadioGroup searchRg;
+    private RadioGroup addRg;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.main_fragment, container, false);
+        final View view = inflater.inflate(R.layout.main_fragment, container, false);
+
+        //final View addView = inflater.inflate(R.layout.add_restaurant_fragment, container, false);
 
         currLocSearch = (RadioButton) view.findViewById(R.id.searchCurrLocRadioButton);
         zipSearch = (RadioButton) view.findViewById(R.id.searchZipRadioButton);
         currLocAdd = (RadioButton) view.findViewById(R.id.addCurrLocRadioButton);
         byNameAdd = (RadioButton) view.findViewById(R.id.addByNameRadioButton);
         zipSearchLoc = (EditText) view.findViewById(R.id.zipSearchEditText);
-        zipAddLoc = (EditText) view.findViewById(R.id.zipAddEditText);
+        nameAddLoc = (EditText) view.findViewById(R.id.nameAddLocEditText);
 
-        Button addButton = (Button) view.findViewById(R.id.addButton);
+        TextView ifSearch = (TextView) view.findViewById(R.id.searchLabel);
+        TextView ifAdd = (TextView) view.findViewById(R.id.addLabel);
+        final LinearLayout addll = (LinearLayout) view.findViewById(R.id.add_linear_layout);
+        final LinearLayout searchll = (LinearLayout) view.findViewById(R.id.search_linear_layout);
+        searchll.setVisibility(View.GONE);
+        addll.setVisibility(View.GONE);
+        ifSearch.isClickable();
+        ifSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(searchll.getVisibility() == View.GONE) {
+                    searchll.setVisibility(View.VISIBLE);
+                    addll.setVisibility(View.GONE);
+                }
+                else {
+                    searchll.setVisibility(View.GONE);
+                }
 
-        Button searchButton = (Button) view.findViewById(R.id.searchButton);
+            }
+        });
 
+        ifAdd.isClickable();
+        ifAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(addll.getVisibility() == View.GONE) {
+                    addll.setVisibility(View.VISIBLE);
+                    searchll.setVisibility(View.GONE);
+                }
+                else{
+                    addll.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        final Button addButton = (Button) view.findViewById(R.id.addButton);
+        addButton.setEnabled(false);
+        final Button searchButton = (Button) view.findViewById(R.id.searchButton);
+        searchButton.setEnabled(false);
+        nameAddLoc.setEnabled(false);
+        zipSearchLoc.setEnabled(false);
+
+        addRg =(RadioGroup) view.findViewById(R.id.add_radio_group);
+        searchRg = (RadioGroup) view.findViewById(R.id.search_radio_group);
+
+        addRg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if(byNameAdd.isChecked()){
+                    nameAddLoc.setHint("Restaurant Name");
+                    nameAddLoc.setEnabled(true);
+                   //onTextChange to enable addbutton
+                }
+                else{
+                    nameAddLoc.setEnabled(false);
+                    nameAddLoc.setHint("");
+                    addButton.setEnabled(true);
+                }
+               // if(nameAddLoc.getText().length() != 0){
+                 //   EditText restaurantName = (EditText) addView.findViewById(R.id.restaurantNameEditText);
+                 //   restaurantName.setText("this works");
+               // }
+            }
+        });
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Intent transferName = new Intent(MainFragment.this.getActivity(), AddActivity.class);
+                //transferName.putExtra("name", nameAddLoc.getText().toString());
+                //startActivity(transferName);
                 startActivity(new Intent(MainFragment.this.getActivity(), AddActivity.class));
             }
         });
 
+        searchRg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if(zipSearch.isChecked()){
+                    zipSearchLoc.setHint("zip code");
+                    zipSearchLoc.setEnabled(true);
+                    //on textChange to enable searchbutton
+                }
+                else{
+                    zipSearchLoc.setEnabled(false);
+                    zipSearchLoc.setHint("");
+                    searchButton.setEnabled(true);
+                }
+
+            }
+        });
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
