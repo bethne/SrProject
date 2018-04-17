@@ -5,8 +5,18 @@ package com.example.bethn.gfree_srproj;
  */
 
 public enum PriceRange {
-    $,
-    $$,
-    $$$,
-    $$$$;
+    $("$"),
+    $$("$$"),
+    $$$("$$$"),
+    $$$$("$$$$");
+
+    private String priceRange;
+
+    PriceRange(String type) {
+        this.priceRange = type;
+    }
+
+    public String getPriceRange() {
+        return priceRange;
+    }
 }

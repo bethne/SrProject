@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -25,7 +26,7 @@ import java.util.List;
 public class AddFragment extends Fragment {
     private EditText restaurantName;
     private EditText restaurantAddress;
-    private RatingBar ratingBar;
+    private Spinner ratingBar;
     private Spinner priceSelector;
     private CheckBox seperateMenu;
     private EditText itemName;
@@ -43,7 +44,7 @@ public class AddFragment extends Fragment {
         //String name = intent.getStringExtra("name");
         restaurantName = (EditText) view.findViewById(R.id.restaurantNameEditText);
         restaurantAddress = (EditText) view.findViewById(R.id.addAddressEditText);
-        ratingBar = (RatingBar) view.findViewById(R.id.restaurantRatingBar);
+        ratingBar = (Spinner) view.findViewById(R.id.ratingBar);
         priceSelector = (Spinner) view.findViewById(R.id.priceSelector);
         seperateMenu = (CheckBox) view.findViewById(R.id.seperateMenuCheckBox);
         itemName = (EditText) view.findViewById(R.id.itemNameText);
@@ -54,6 +55,26 @@ public class AddFragment extends Fragment {
         final FiltersAdapter fAdapter = new FiltersAdapter(getActivity(), filtersData.filterStuff());
 
         filtersListView.setAdapter(fAdapter);
+
+        List<String> pRL = new ArrayList<String>();
+        for (PriceRange range : PriceRange.values()) {
+            pRL.add(range.getPriceRange());
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
+                R.layout.checked_textview, pRL);
+//        adapter.setDropDownViewResource(android.R.layout.checkboxviewlayout);
+        priceSelector.setAdapter(adapter);
+
+
+
+        String[] stars = new String[]{"1","2","3","4","5"};
+
+        ArrayAdapter<String> starAdapter = new ArrayAdapter<String>(getActivity(),
+                R.layout.star_checked_textview, stars);
+        ratingBar.setAdapter(starAdapter);
+
+
 
         restaurantName.setText(AppSession.getInstance().getName());
 
@@ -77,12 +98,7 @@ public class AddFragment extends Fragment {
             }
         });
 
-        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-            @Override
-            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                ratingBar.setNumStars(Math.round(rating));
-            }
-        });
+
         return view;
     }
 
@@ -103,6 +119,7 @@ public class AddFragment extends Fragment {
 
         return newRestaurant;
     }
+
 
     public void showAlertDialogButtonClicked(View view) {
         // setup the alert builder

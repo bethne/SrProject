@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<CheckedTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:checkMark="@android:drawable/btn_star_big_on"
+    android:checked="true"
+    android:gravity="center"
+    android:text="Checked Text View"
+    android:textSize="25sp" />
+
