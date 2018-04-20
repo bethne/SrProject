@@ -21,7 +21,7 @@ public class RestaurantDataProvider {
     private List<Restaurant> restaurants;
     private DatabaseReference dbRef;
 
-    public RestaurantDataProvider(Context context) {
+    public RestaurantDataProvider() {
         dbRef = (DatabaseReference) FirebaseDatabase.getInstance().getReference(RESTAURANTS_REF);
         restaurants = getRestaurantsFromDatabase();
     }

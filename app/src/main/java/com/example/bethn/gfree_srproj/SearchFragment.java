@@ -34,7 +34,7 @@ public class SearchFragment extends Fragment {
         View view = inflater.inflate(R.layout.search_fragment, container, false);
         searchBox = (EditText) view.findViewById(R.id.search_box);
         searchResults = (ListView) view.findViewById(R.id.search_results);
-        restaurantDataProvider = new RestaurantDataProvider(getActivity());
+        restaurantDataProvider = AppSession.getInstance().getRestaurantDataProvider();
 
         final RestaurantAdapter rAdapter = new RestaurantAdapter(getActivity(),0);
         final List<Restaurant> fullList = restaurantDataProvider.getRestaurants();//returns restaurant list from dataProvider

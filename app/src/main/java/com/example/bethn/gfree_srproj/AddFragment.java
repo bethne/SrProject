@@ -39,7 +39,7 @@ public class AddFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.add_restaurant_fragment, container, false);
 
-        restaurantDataProvider = new RestaurantDataProvider(getActivity());
+        restaurantDataProvider = AppSession.getInstance().getRestaurantDataProvider();
 
         restaurantName = (EditText) view.findViewById(R.id.restaurantNameEditText);
         restaurantAddress = (EditText) view.findViewById(R.id.addAddressEditText);

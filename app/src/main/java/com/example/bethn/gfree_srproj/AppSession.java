@@ -10,6 +10,7 @@ import java.util.List;
 public class AppSession {
 
     private static AppSession single_instance = null;
+    private RestaurantDataProvider restaurantDataProvider = new RestaurantDataProvider();
     private String name;
 
 
@@ -30,5 +31,9 @@ public class AppSession {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public RestaurantDataProvider getRestaurantDataProvider() {
+        return restaurantDataProvider;
     }
 }
