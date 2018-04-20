@@ -131,25 +131,19 @@
                 android:textColor="@android:color/black"
                 android:textSize="18sp" />
 
-            <LinearLayout
-                android:id="@+id/linear"
-                android:layout_below="@id/filtersLabel"
+            <Spinner
+                android:id="@+id/filters_spinner"
+                android:layout_below="@+id/filtersLabel"
+                android:paddingLeft="5dp"
                 android:layout_width="match_parent"
-                android:layout_height="120dp">
-
-                <ListView
-                    android:id="@+id/filters_list_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
-
-            </LinearLayout>
+                android:layout_height="wrap_content"/>
 
             <EditText
                 android:id="@+id/itemNameText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/linear"
+                android:layout_below="@+id/filters_spinner"
                 android:ems="10"
                 android:hint="Item Name"
                 android:inputType="textPersonName"

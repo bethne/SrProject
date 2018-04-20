@@ -8,17 +8,17 @@ import java.util.List;
  */
 
 public class FiltersDataProvider {
-    public List<Filters> filterStuff() {
-        List<Filters> filtersList = new ArrayList<>();
+    public List<String> filterStuff() {
+        List<String> filtersList = new ArrayList<>();
         //use list containing checkbox value and name to test filter view
-        filtersList.add(new Filters("Sandwiches",false));
-        filtersList.add(new Filters("Breakfast",true));
-        filtersList.add(new Filters("Pasteries",true));
-        filtersList.add(new Filters("American",false));
-        filtersList.add(new Filters("Chinese",false));
-        filtersList.add(new Filters("Mexican",false));
-        filtersList.add(new Filters("Lunch",false));
-        filtersList.add(new Filters("Fast Food",true));
+        filtersList.add("Sandwiches");
+        filtersList.add("Breakfast");
+        filtersList.add("Pasteries");
+        filtersList.add("American");
+        filtersList.add("Chinese");
+        filtersList.add("Mexican");
+        filtersList.add("Lunch");
+        filtersList.add("Fast Food");
         return  filtersList;
     }
 }

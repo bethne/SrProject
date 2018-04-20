@@ -1,7 +1,15 @@
 package com.example.bethn.gfree_srproj;
 
+import android.content.Context;
+
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -9,13 +17,43 @@ import java.util.List;
  */
 
 public class RestaurantDataProvider {
+    private final static String RESTAURANTS_REF = "restaurants";
     private List<Restaurant> restaurants;
+    private DatabaseReference dbRef;
 
-    public RestaurantDataProvider() {
-        restaurants = makeStuff();
+    public RestaurantDataProvider(Context context) {
+        dbRef = (DatabaseReference) FirebaseDatabase.getInstance().getReference(RESTAURANTS_REF);
+        restaurants = getRestaurantsFromDatabase();
     }
 
-    private List<Restaurant> makeStuff() {
+    private List<Restaurant> getRestaurantsFromDatabase() {
+        final List<Restaurant> restaurantList = new ArrayList<>();
+        dbRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot restaurantSnap : dataSnapshot.getChildren()) {
+                    restaurantList.add(restaurantSnap.getValue(Restaurant.class));
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        return restaurantList;
+    }
+
+    public void addRestaurantToDatabase(Restaurant restaurant){
+
+        dbRef.child(dbRef.push().getKey()).setValue(restaurant);
+
+
+
+    }
+
+        /*
         List<Restaurant> restaurantList = new ArrayList<>();
         List<Item> menu = new ArrayList<>();
         Item fakemenu = new Item("chicken nuggets", "nuggets of chicken",
@@ -64,7 +102,7 @@ public class RestaurantDataProvider {
 
         return restaurantList;
 
-    }
+        */
 
     public List<Restaurant> getRestaurants() {
         return restaurants;

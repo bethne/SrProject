@@ -11,6 +11,7 @@ import android.widget.TextView;
 public class FiltersViewHolder {
     private TextView textView;
     private CheckBox checkBox;
+    private String filterName;
 
     public FiltersViewHolder() {
     }
@@ -18,6 +19,7 @@ public class FiltersViewHolder {
     public FiltersViewHolder(TextView textView, CheckBox checkBox) {
         this.textView = textView;
         this.checkBox = checkBox;
+        this.filterName = filterName;
     }
 
     public TextView getTextView() {
@@ -34,5 +36,13 @@ public class FiltersViewHolder {
 
     public void setCheckBox(CheckBox checkBox) {
         this.checkBox = checkBox;
+    }
+
+    public String getFilterName() {
+        return filterName;
+    }
+
+    public void setFilterName(String filterName) {
+        this.filterName = filterName;
     }
 }

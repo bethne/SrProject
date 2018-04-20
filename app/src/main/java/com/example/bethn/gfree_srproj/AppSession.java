@@ -10,8 +10,6 @@ import java.util.List;
 public class AppSession {
 
     private static AppSession single_instance = null;
-    private List<Restaurant> restaurantList = null;
-    private RestaurantDataProvider restaurantDataProvider = new RestaurantDataProvider();
     private String name;
 
 
@@ -24,17 +22,6 @@ public class AppSession {
     }
 
     private AppSession() {
-
-        restaurantList = new ArrayList<Restaurant>();
-    }
-
-    // retrieve list from anywhere
-    public List<Restaurant> getList() {
-        return restaurantDataProvider.getRestaurants();
-    }
-    //Add element to list
-    public void addToRestaurantList(Restaurant restaurant) {
-        restaurantList.add(restaurant);
     }
 
     public String getName() {

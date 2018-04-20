@@ -12,8 +12,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.RatingBar;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
@@ -32,7 +30,8 @@ public class AddFragment extends Fragment {
     private EditText itemName;
     private List<Filters> filters;
     private FiltersDataProvider filtersData;
-    private ListView filtersListView;
+    private Spinner filtersListSpinner;
+    private RestaurantDataProvider restaurantDataProvider;
 
 
     @Nullable
@@ -40,40 +39,38 @@ public class AddFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.add_restaurant_fragment, container, false);
 
-       // Intent intent = getIntent();
-        //String name = intent.getStringExtra("name");
+        restaurantDataProvider = new RestaurantDataProvider(getActivity());
+
         restaurantName = (EditText) view.findViewById(R.id.restaurantNameEditText);
         restaurantAddress = (EditText) view.findViewById(R.id.addAddressEditText);
         ratingBar = (Spinner) view.findViewById(R.id.ratingBar);
         priceSelector = (Spinner) view.findViewById(R.id.priceSelector);
         seperateMenu = (CheckBox) view.findViewById(R.id.seperateMenuCheckBox);
         itemName = (EditText) view.findViewById(R.id.itemNameText);
+        filtersListSpinner = (Spinner) view.findViewById(R.id.filters_spinner);
 
-        filtersListView = (ListView) view.findViewById(R.id.filters_list_view);
+        //NEEDS TO BE ABLE TO SELECT MULTIPLE FILTERS
+        //use alert box to display checkbox listview
         filtersData = new FiltersDataProvider();
-
-        final FiltersAdapter fAdapter = new FiltersAdapter(getActivity(), filtersData.filterStuff());
-
-        filtersListView.setAdapter(fAdapter);
+        final  List<String> filtersList = new ArrayList<>();
+        for(String filter : filtersData.filterStuff()){
+            filtersList.add(filter);
+        }
+        ArrayAdapter fAdapter = new ArrayAdapter<String>(getActivity(),R.layout.checked_textview, filtersList);
+        filtersListSpinner.setAdapter(fAdapter);
 
         List<String> pRL = new ArrayList<String>();
         for (PriceRange range : PriceRange.values()) {
             pRL.add(range.getPriceRange());
         }
-
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
                 R.layout.checked_textview, pRL);
-//        adapter.setDropDownViewResource(android.R.layout.checkboxviewlayout);
         priceSelector.setAdapter(adapter);
 
-
-
         String[] stars = new String[]{"1","2","3","4","5"};
-
         ArrayAdapter<String> starAdapter = new ArrayAdapter<String>(getActivity(),
                 R.layout.star_checked_textview, stars);
         ratingBar.setAdapter(starAdapter);
-
 
 
         restaurantName.setText(AppSession.getInstance().getName());
@@ -89,7 +86,7 @@ public class AddFragment extends Fragment {
                 }
                 else {
                     //add restaurant info from createRestaurant to restaurantList
-                    AppSession.getInstance().getList().add(createRestaurant());
+                    restaurantDataProvider.addRestaurantToDatabase(createRestaurant());
 
                     //go back to home screen
                     startActivity(new Intent(AddFragment.this.getActivity(), MainActivity.class));

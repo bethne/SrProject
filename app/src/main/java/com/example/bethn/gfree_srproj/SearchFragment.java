@@ -13,6 +13,9 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
+
+import com.google.firebase.FirebaseApp;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +26,7 @@ import java.util.List;
 public class SearchFragment extends Fragment {
     private EditText searchBox;
     private ListView searchResults;
-    private AppSession data;
+    private RestaurantDataProvider restaurantDataProvider;
 
     @Nullable
     @Override
@@ -31,11 +34,10 @@ public class SearchFragment extends Fragment {
         View view = inflater.inflate(R.layout.search_fragment, container, false);
         searchBox = (EditText) view.findViewById(R.id.search_box);
         searchResults = (ListView) view.findViewById(R.id.search_results);
-
-        data = AppSession.getInstance();
+        restaurantDataProvider = new RestaurantDataProvider(getActivity());
 
         final RestaurantAdapter rAdapter = new RestaurantAdapter(getActivity(),0);
-        final List<Restaurant> fullList = data.getList();//returns restaurant list from dataProvider
+        final List<Restaurant> fullList = restaurantDataProvider.getRestaurants();//returns restaurant list from dataProvider
         rAdapter.setRestaurants(fullList);
         searchResults.setAdapter(rAdapter);
 
@@ -49,7 +51,7 @@ public class SearchFragment extends Fragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 List<Restaurant> filteredRestaurants = new ArrayList<>();
 
-                for(Restaurant restaurant : data.getList()){
+                for(Restaurant restaurant : restaurantDataProvider.getRestaurants()){
 
                     if(restaurant.getName().toLowerCase().contains(s.toString().toLowerCase())){
                         filteredRestaurants.add(restaurant);
@@ -68,11 +70,11 @@ public class SearchFragment extends Fragment {
         searchResults.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(SearchFragment.this.getActivity(),RestaurantInfoActivity.class);
-                Object clicked = searchResults.getItemAtPosition(position);
 
-               // intent.putExtra("info", clicked);
-                startActivity(intent);
+//               Intent intent = new Intent(SearchFragment.this.getActivity(),RestaurantInfoActivity.class);
+//               // intent.putExtra("info", clicked);
+//                startActivity(intent);
+
             }
         });
 
