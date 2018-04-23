@@ -17,6 +17,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import static com.example.bethn.gfree_srproj.MapsActivity.MAP_ZIP;
+
 /**
  * Created by bethn on 3/30/2018.
  */
@@ -174,10 +176,15 @@ public class MainFragment extends Fragment {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name = nameAddLoc.getText().toString();
-                AppSession appSession = AppSession.getInstance();
-                appSession.setName(name);
-                startActivity(new Intent(MainFragment.this.getActivity(), SearchActivity.class));
+
+                Intent intent = new Intent(MainFragment.this.getActivity(),MapsActivity.class);
+                intent.putExtra(MAP_ZIP, zipSearchLoc.getText().toString());
+                startActivity(intent);
+
+//                String name = nameAddLoc.getText().toString();
+//                AppSession appSession = AppSession.getInstance();
+//                appSession.setName(name);
+//                startActivity(new Intent(MainFragment.this.getActivity(), SearchActivity.class));
             }
         });
 

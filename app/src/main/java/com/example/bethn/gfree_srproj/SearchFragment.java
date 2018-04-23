@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -18,6 +19,8 @@ import com.google.firebase.FirebaseApp;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.bethn.gfree_srproj.MapsActivity.MAP_ZIP;
 
 /**
  * Created by bethn on 3/30/2018.
@@ -40,6 +43,17 @@ public class SearchFragment extends Fragment {
         final List<Restaurant> fullList = restaurantDataProvider.getRestaurants();//returns restaurant list from dataProvider
         rAdapter.setRestaurants(fullList);
         searchResults.setAdapter(rAdapter);
+
+        Button mapButton = (Button) view.findViewById(R.id.mapButton);
+        mapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(SearchFragment.this.getActivity(), MapsActivity.class));
+
+            }
+        });
+
 
         searchBox.addTextChangedListener(new TextWatcher() {
             @Override
@@ -77,6 +91,7 @@ public class SearchFragment extends Fragment {
 
             }
         });
+
 
 
         return view;

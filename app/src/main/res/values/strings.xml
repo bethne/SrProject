@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">GFree_SrProj</string>
     <string name="title_activity_adding_restaurant">addingRestaurant</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
