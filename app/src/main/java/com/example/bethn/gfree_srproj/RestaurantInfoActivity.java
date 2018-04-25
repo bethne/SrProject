@@ -9,7 +9,7 @@ import android.support.v7.app.AppCompatActivity;
  * Created by bethn on 4/14/2018.
  */
 
-public class RestaurantInfoActivity extends AppCompatActivity {
+public class RestaurantInfoActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

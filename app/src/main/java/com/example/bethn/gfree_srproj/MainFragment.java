@@ -99,6 +99,7 @@ public class MainFragment extends Fragment {
                     nameAddLoc.setEnabled(false);
                     nameAddLoc.setHint("Restaurant Name");
                     nameAddLoc.setEnabled(true);
+                    AppSession.getInstance().setName(nameAddLoc.getText().toString());
                    //onTextChange to enable addbutton
                 }
                 else{
@@ -119,6 +120,9 @@ public class MainFragment extends Fragment {
                 //Intent transferName = new Intent(MainFragment.this.getActivity(), AddActivity.class);
                 //transferName.putExtra("name", nameAddLoc.getText().toString());
                 //startActivity(transferName);
+                String name = nameAddLoc.getText().toString();
+                AppSession appSession = AppSession.getInstance();
+                appSession.setName(name);
                 startActivity(new Intent(MainFragment.this.getActivity(), AddActivity.class));
             }
         });
@@ -177,13 +181,13 @@ public class MainFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(MainFragment.this.getActivity(),MapsActivity.class);
-                intent.putExtra(MAP_ZIP, zipSearchLoc.getText().toString());
-                startActivity(intent);
+                AppSession.getInstance().setZipSearch(zipSearchLoc.getText().toString());
+                Intent mapIntent = new Intent(MainFragment.this.getActivity(),MapsActivity.class);
+                startActivity(mapIntent);
 
-//                String name = nameAddLoc.getText().toString();
-//                AppSession appSession = AppSession.getInstance();
-//                appSession.setName(name);
+                String name = nameAddLoc.getText().toString();
+                AppSession appSession = AppSession.getInstance();
+                appSession.setName(name);
 //                startActivity(new Intent(MainFragment.this.getActivity(), SearchActivity.class));
             }
         });

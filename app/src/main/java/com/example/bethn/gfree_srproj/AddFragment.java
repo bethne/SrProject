@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toolbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,8 +31,9 @@ public class AddFragment extends Fragment {
     private EditText itemName;
     private List<Filters> filters;
     private FiltersDataProvider filtersData;
-    private Spinner filtersListSpinner;
+    private Button filtersListButton;
     private RestaurantDataProvider restaurantDataProvider;
+    private Toolbar toolbar;
 
 
     @Nullable
@@ -41,23 +43,35 @@ public class AddFragment extends Fragment {
 
         restaurantDataProvider = AppSession.getInstance().getRestaurantDataProvider();
 
+        toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+
+        //setActionBar(toolbar);
+
         restaurantName = (EditText) view.findViewById(R.id.restaurantNameEditText);
         restaurantAddress = (EditText) view.findViewById(R.id.addAddressEditText);
         ratingBar = (Spinner) view.findViewById(R.id.ratingBar);
         priceSelector = (Spinner) view.findViewById(R.id.priceSelector);
         seperateMenu = (CheckBox) view.findViewById(R.id.seperateMenuCheckBox);
         itemName = (EditText) view.findViewById(R.id.itemNameText);
-        filtersListSpinner = (Spinner) view.findViewById(R.id.filters_spinner);
+        filtersListButton = (Button) view.findViewById(R.id.filters_button);
 
         //NEEDS TO BE ABLE TO SELECT MULTIPLE FILTERS
         //use alert box to display checkbox listview
         filtersData = new FiltersDataProvider();
-        final  List<String> filtersList = new ArrayList<>();
-        for(String filter : filtersData.filterStuff()){
+        filtersData.reset();
+        final List<Filters> filtersList = new ArrayList<>();
+        for(Filters filter : filtersData.getFilters()){
             filtersList.add(filter);
         }
-        ArrayAdapter fAdapter = new ArrayAdapter<String>(getActivity(),R.layout.checked_textview, filtersList);
-        filtersListSpinner.setAdapter(fAdapter);
+
+        //ArrayAdapter fAdapter = new ArrayAdapter<String>(getActivity(),R.layout.checked_textview, filtersList);
+        filtersListButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyDialogFragment dialogFragment = new MyDialogFragment();
+                dialogFragment.show(getFragmentManager(),MyDialogFragment.class.getName());
+            }
+        });
 
         List<String> pRL = new ArrayList<String>();
         for (PriceRange range : PriceRange.values()) {
@@ -71,7 +85,6 @@ public class AddFragment extends Fragment {
         ArrayAdapter<String> starAdapter = new ArrayAdapter<String>(getActivity(),
                 R.layout.star_checked_textview, stars);
         ratingBar.setAdapter(starAdapter);
-
 
         restaurantName.setText(AppSession.getInstance().getName());
 
@@ -113,6 +126,12 @@ public class AddFragment extends Fragment {
         menu.add(fakemenu);
         newRestaurant.setMenu(menu);
 
+        List<String> filters = new ArrayList<>();
+        for (Filters curFilter : filtersData.getFilters()) {
+            filters.add(curFilter.getName());
+        }
+
+        newRestaurant.setFilters(filters);
 
         return newRestaurant;
     }

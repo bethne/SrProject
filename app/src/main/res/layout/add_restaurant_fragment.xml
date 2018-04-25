@@ -3,12 +3,36 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
+
+    <!--<android.support.v7.widget.Toolbar-->
+        <!--android:id="@+id/add_toolbar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@color/colorPrimary">-->
+
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:textSize="20sp"-->
+            <!--android:text="Add A Restaurant"-->
+            <!--android:textColor="@color/colorPrimaryDark"/>-->
+
+
+    <!--</android.support.v7.widget.Toolbar>-->
+
+
+    <!--<include layout="@layout/my_toolbar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent" />-->
+
+
 
     <ScrollView
         android:id="@+id/scrollView3"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -85,7 +109,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/addAddressEditText"
                 android:layout_marginTop="54dp"
-                android:layout_toEndOf="@+id/filtersLabel" />
+                android:layout_toEndOf="@+id/filters_button" />
 
             <TextView
                 android:id="@+id/ratingLabel"
@@ -119,23 +143,12 @@
                 android:text="Location has a separate gluten free menu"
                 android:textSize="17sp" />
 
-            <TextView
-                android:id="@+id/filtersLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignStart="@+id/seperateMenuCheckBox"
+            <Button
+                android:id="@+id/filters_button"
                 android:layout_below="@+id/seperateMenuCheckBox"
-                android:layout_marginTop="12dp"
-                android:paddingLeft="5dp"
                 android:text="Filters"
-                android:textColor="@android:color/black"
-                android:textSize="18sp" />
-
-            <Spinner
-                android:id="@+id/filters_spinner"
-                android:layout_below="@+id/filtersLabel"
                 android:paddingLeft="5dp"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
             <EditText
@@ -143,7 +156,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/filters_spinner"
+                android:layout_below="@+id/filters_button"
                 android:ems="10"
                 android:hint="Item Name"
                 android:inputType="textPersonName"

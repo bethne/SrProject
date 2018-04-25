@@ -9,7 +9,7 @@ import android.support.v7.app.AppCompatActivity;
  * Created by bethn on 3/30/2018.
  */
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends BaseActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

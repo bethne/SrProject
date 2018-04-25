@@ -17,6 +17,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            android:windowSoftInputMode="stateHidden"
         </activity>
         <activity android:name=".AddActivity"></activity>
         <activity android:name=".SearchActivity"></activity>

@@ -1,3 +1,49 @@
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:id="@+id/tool_left_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20sp"
+            android:text="Map"/>
+
+        <Button
+            android:id="@+id/list_view_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="List View"
+            android:textColor="@color/colorPrimaryDark"
+            android:background="@color/colorPrimary"
+            android:layout_gravity="right"
+            />
+
+        <!--<Button-->
+            <!--android:id="@+id/list_view_button"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="22dp"-->
+            <!---->
+            <!--android:textAlignment="center"-->
+            <!--android:text="List View"-->
+            <!--android:textSize="20sp"-->
+            <!--android:textColor="@color/colorPrimaryDark"/>-->
+
+    </android.support.v7.widget.Toolbar>
+
 <fragment xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:map="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,3 +52,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.bethn.gfree_srproj.MapsActivity" />
+
+
+</LinearLayout>

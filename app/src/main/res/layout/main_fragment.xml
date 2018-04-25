@@ -93,7 +93,10 @@
                     <EditText
                         android:id="@+id/zipSearchEditText"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:imeOptions="actionDone"
+                        />
 
                 </RadioGroup>
 
@@ -162,7 +165,10 @@
                     <EditText
                         android:id="@+id/nameAddLocEditText"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:imeOptions="actionDone"
+                        />
                 </RadioGroup>
 
                 <Button

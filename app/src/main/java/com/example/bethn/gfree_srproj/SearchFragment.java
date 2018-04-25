@@ -49,7 +49,8 @@ public class SearchFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                startActivity(new Intent(SearchFragment.this.getActivity(), MapsActivity.class));
+                Intent intent = new Intent(SearchFragment.this.getActivity(),MapsActivity.class);
+                startActivity(intent);
 
             }
         });

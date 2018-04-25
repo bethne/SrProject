@@ -11,7 +11,9 @@ public class AppSession {
 
     private static AppSession single_instance = null;
     private RestaurantDataProvider restaurantDataProvider = new RestaurantDataProvider();
+    private FiltersDataProvider filtersDataProvider = new FiltersDataProvider();
     private String name;
+    private String zipSearch;
 
 
     public static AppSession getInstance()
@@ -25,6 +27,9 @@ public class AppSession {
     private AppSession() {
     }
 
+    public void setZipSearch(String zipSearch){ this.zipSearch = zipSearch; }
+    public String getZipSearch(){return zipSearch; }
+
     public String getName() {
         return name;
     }
@@ -36,4 +41,6 @@ public class AppSession {
     public RestaurantDataProvider getRestaurantDataProvider() {
         return restaurantDataProvider;
     }
+
+    public FiltersDataProvider getFiltersDataProvider(){ return filtersDataProvider; }
 }

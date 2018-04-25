@@ -16,6 +16,7 @@ public class Restaurant implements Parcelable{
     private String type;
     private String hours;
     private PriceRange priceRange;
+    private List<String> filters;
     private FoodType foodType;
     private List<Item> menu;
 
@@ -122,6 +123,14 @@ public class Restaurant implements Parcelable{
 
     public void setPriceRange(PriceRange priceRange) {
         this.priceRange = priceRange;
+    }
+
+    public List<String> getFilters() {
+        return filters;
+    }
+
+    public void setFilters(List<String> filters) {
+        this.filters = filters;
     }
 
     public FoodType getFoodType() {
