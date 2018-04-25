@@ -2,21 +2,35 @@ package com.example.bethn.gfree_srproj;
 
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toolbar;
 
 import com.google.firebase.FirebaseApp;
 
 public class AddActivity extends BaseActivity {
 
+    private Button homeButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_add_restaurant);
+
+        final Intent intent = new Intent(this, MainActivity.class);
+
+        homeButton = (Button) findViewById(R.id.home_button);
+        homeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(intent);
+            }
+        });
 
         android.support.v7.widget.Toolbar  toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

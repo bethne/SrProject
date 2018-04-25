@@ -39,12 +39,12 @@ public class RestaurantInfoFragment extends Fragment {
 
         this.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        name = (TextView) view.findViewById(R.id.restaurant_info_name);
+        name = (TextView) view.findViewById(R.id.restaurant_name);
         location = (TextView) view.findViewById(R.id.restaurant_info_locations);
         phone = (TextView) view.findViewById(R.id.restaurant_info_phone);
         hours = (TextView) view.findViewById(R.id.restaurant_info_hours);
-        categoriesLabel = (TextView) view.findViewById(R.id.restaurant_info_categories);
-        menuLabel = (TextView) view.findViewById(R.id.restaurant_info_menu);
+        categoriesLabel = (TextView) view.findViewById(R.id.categories_label);
+        menuLabel = (TextView) view.findViewById(R.id.menu_label);
         reviewsLabel = (TextView) view.findViewById(R.id.restaurant_info_reviews);
         addReviewButton = (Button) view.findViewById(R.id.add_review_button);
 

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -48,16 +49,16 @@ public class SearchFragment extends Fragment implements RestaurantAdapter.Restau
         rAdapter.setRestaurants(fullList);
         searchResults.setAdapter(rAdapter);
 
-        Button mapButton = (Button) view.findViewById(R.id.mapButton);
-        mapButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(SearchFragment.this.getActivity(),MapsActivity.class);
-                startActivity(intent);
-
-            }
-        });
+//        Button mapButton = (Button) view.findViewById(R.id.mapButton);
+//        mapButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                Intent intent = new Intent(SearchFragment.this.getActivity(),MapsActivity.class);
+//                startActivity(intent);
+//
+//            }
+//        });
 
 
         searchBox.addTextChangedListener(new TextWatcher() {
