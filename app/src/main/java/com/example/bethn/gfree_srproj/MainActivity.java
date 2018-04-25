@@ -22,6 +22,9 @@ public class MainActivity extends BaseActivity {
         fragmentTransaction.add(R.id.main_fragment_container, new MainFragment(), MainFragment.class.getName());
         fragmentTransaction.commit();
 
+        //load data early
+        AppSession.getInstance().getRestaurantDataProvider().getRestaurants();
+
     }
 
 }

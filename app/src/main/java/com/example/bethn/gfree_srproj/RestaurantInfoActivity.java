@@ -10,16 +10,25 @@ import android.support.v7.app.AppCompatActivity;
  */
 
 public class RestaurantInfoActivity extends BaseActivity {
+    public static final String RESTAURANT_SELECTED = "RESTAURANT_SELECTED";
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_restaurant_info);
 
-        getSupportActionBar().hide();
+
+        RestaurantInfoFragment restaurantInfoFragment = new RestaurantInfoFragment();
+        if (getIntent().getExtras() != null) {
+            Restaurant restaurant = getIntent().getExtras().getParcelable(RESTAURANT_SELECTED);
+            Bundle args = new Bundle();
+            args.putParcelable(RestaurantInfoFragment.RESTAURANT_SELECTED_INFO, restaurant);
+            restaurantInfoFragment.setArguments(args);
+        }
 
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.restaurant_info_fragment_container, new RestaurantInfoFragment(), RestaurantInfoFragment.class.getName());
+        fragmentTransaction.add(R.id.restaurant_info_fragment_container, restaurantInfoFragment, RestaurantInfoFragment.class.getName());
         fragmentTransaction.commit();
     }
 }

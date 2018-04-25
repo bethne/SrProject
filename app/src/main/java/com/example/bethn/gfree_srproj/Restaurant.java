@@ -3,6 +3,7 @@ package com.example.bethn.gfree_srproj;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,43 +35,7 @@ public class Restaurant implements Parcelable{
         this.menu = menu;
     }
 
-    // Parcelling part
-    public Restaurant(Parcel in){
-        String[] data = new String[8];
 
-        in.readStringArray(data);
-        // the order needs to be the same as in writeToParcel() method
-        this.name = data[0];
-        this.address = data[1];
-        this.phone = data[2];
-        this.type = data[3];
-        this.hours = data[4];
-        //this.priceRange = data[5];
-       // this.foodType = data[6];
-
-    }
-
-    public static final Creator<Restaurant> CREATOR = new Creator<Restaurant>() {
-        @Override
-        public Restaurant createFromParcel(Parcel in) {
-            return new Restaurant(in);
-        }
-
-        @Override
-        public Restaurant[] newArray(int size) {
-            return new Restaurant[size];
-        }
-    };
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-
-        dest.writeString(name);
-        dest.writeString(address);
-        dest.writeString(phone);
-        dest.writeString(type);
-        dest.writeString(hours);
-    }
 
     @Override
     public int describeContents() {
@@ -148,4 +113,62 @@ public class Restaurant implements Parcelable{
     public void setMenu(List<Item> menu) {
         this.menu = menu;
     }
+
+    protected Restaurant(Parcel in) {
+        name = in.readString();
+        address = in.readString();
+        phone = in.readString();
+        type = in.readString();
+        hours = in.readString();
+        priceRange = (PriceRange) in.readValue(PriceRange.class.getClassLoader());
+        if (in.readByte() == 0x01) {
+            filters = new ArrayList<String>();
+            in.readList(filters, String.class.getClassLoader());
+        } else {
+            filters = null;
+        }
+        foodType = (FoodType) in.readValue(FoodType.class.getClassLoader());
+        if (in.readByte() == 0x01) {
+            menu = new ArrayList<Item>();
+            in.readList(menu, Item.class.getClassLoader());
+        } else {
+            menu = null;
+        }
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeString(address);
+        dest.writeString(phone);
+        dest.writeString(type);
+        dest.writeString(hours);
+        dest.writeValue(priceRange);
+        if (filters == null) {
+            dest.writeByte((byte) (0x00));
+        } else {
+            dest.writeByte((byte) (0x01));
+            dest.writeList(filters);
+        }
+        dest.writeValue(foodType);
+        if (menu == null) {
+            dest.writeByte((byte) (0x00));
+        } else {
+            dest.writeByte((byte) (0x01));
+            dest.writeList(menu);
+        }
+    }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<Restaurant> CREATOR = new Parcelable.Creator<Restaurant>() {
+        @Override
+        public Restaurant createFromParcel(Parcel in) {
+            return new Restaurant(in);
+        }
+
+        @Override
+        public Restaurant[] newArray(int size) {
+            return new Restaurant[size];
+        }
+    };
 }

@@ -27,7 +27,7 @@ import static com.example.bethn.gfree_srproj.MapsActivity.MAP_ZIP;
  * Created by bethn on 3/30/2018.
  */
 
-public class SearchFragment extends Fragment {
+public class SearchFragment extends Fragment implements RestaurantAdapter.RestaurantAdapterItemSelected {
     private EditText searchBox;
     private ListView searchResults;
     private RestaurantDataProvider restaurantDataProvider;
@@ -43,7 +43,7 @@ public class SearchFragment extends Fragment {
         searchResults = (ListView) view.findViewById(R.id.search_results);
         restaurantDataProvider = AppSession.getInstance().getRestaurantDataProvider();
 
-        final RestaurantAdapter rAdapter = new RestaurantAdapter(getActivity(),0);
+        final RestaurantAdapter rAdapter = new RestaurantAdapter(getActivity(),0, this);
         final List<Restaurant> fullList = restaurantDataProvider.getRestaurants();//returns restaurant list from dataProvider
         rAdapter.setRestaurants(fullList);
         searchResults.setAdapter(rAdapter);
@@ -103,4 +103,10 @@ public class SearchFragment extends Fragment {
     }
 
 
+    @Override
+    public void restaurantSelected(Restaurant restaurant) {
+        Intent intent = new Intent(getActivity(), RestaurantInfoActivity.class);
+        intent.putExtra(RestaurantInfoActivity.RESTAURANT_SELECTED, restaurant);
+        startActivity(intent);
+    }
 }

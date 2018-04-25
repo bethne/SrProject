@@ -19,10 +19,11 @@ import java.util.List;
 
 public class RestaurantAdapter extends ArrayAdapter {
     private List<Restaurant> restaurants;
+    private RestaurantAdapterItemSelected restaurantAdapterItemSelected;
 
-
-    public RestaurantAdapter(@NonNull Context context, int resource) {
+    public RestaurantAdapter(@NonNull Context context, int resource, RestaurantAdapterItemSelected restaurantAdapterItemSelected) {
         super(context, resource);
+        this.restaurantAdapterItemSelected = restaurantAdapterItemSelected;
     }
 
     public void setRestaurants(List<Restaurant> restaurants) {
@@ -36,7 +37,7 @@ public class RestaurantAdapter extends ArrayAdapter {
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View view;
         if (convertView == null) {
             LayoutInflater layoutInflater = LayoutInflater.from(getContext());
@@ -45,9 +46,23 @@ public class RestaurantAdapter extends ArrayAdapter {
         else {
             view = convertView;
         }
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (restaurantAdapterItemSelected != null) {
+                    restaurantAdapterItemSelected.restaurantSelected(restaurants.get(position));
+                }
+            }
+        });
+
         TextView restaurantName = (TextView) view.findViewById(R.id.restaurant_name);
         restaurantName.setText(restaurants.get(position).getName());
 
         return view;
+    }
+
+    public interface RestaurantAdapterItemSelected {
+        public void restaurantSelected(Restaurant restaurant);
     }
 }

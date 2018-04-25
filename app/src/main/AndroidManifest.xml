@@ -20,7 +20,8 @@
             </intent-filter>
             android:windowSoftInputMode="stateHidden"
         </activity>
-
+        <activity android:name=".RestaurantInfoActivity"
+            />
 
         <activity android:name=".AddActivity">
         </activity>

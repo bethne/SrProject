@@ -18,6 +18,8 @@ import java.util.List;
  */
 
 public class RestaurantInfoFragment extends Fragment {
+    public static final String RESTAURANT_SELECTED_INFO = "RESTAURANT_SELECTED_INFO";
+
     private TextView name;
     private TextView location;
     private TextView phone;
@@ -27,6 +29,8 @@ public class RestaurantInfoFragment extends Fragment {
     private TextView menuLabel;
     private TextView reviewsLabel;
     private Button addReviewButton;
+
+    private Restaurant restaurant;
 
     @Nullable
     @Override
@@ -50,6 +54,11 @@ public class RestaurantInfoFragment extends Fragment {
                 startActivity(new Intent(RestaurantInfoFragment.this.getActivity(), AddActivity.class));
             }
         });
+
+        Restaurant restaurant = null;
+        if (getArguments() != null) {
+            getArguments().getParcelable(RESTAURANT_SELECTED_INFO);
+        }
 
 
 

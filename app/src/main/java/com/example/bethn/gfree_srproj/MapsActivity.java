@@ -17,6 +17,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
@@ -116,6 +117,13 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
                         LatLng latLng = new LatLng(curAddress.getLatitude(), curAddress.getLongitude());
                         //markers should be pulled from the database
                         mMap.addMarker(new MarkerOptions().position(latLng).title(restaurant.getName()));
+
+                        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                            @Override
+                            public boolean onMarkerClick(Marker marker) {
+                                return false;
+                            }
+                        });
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
