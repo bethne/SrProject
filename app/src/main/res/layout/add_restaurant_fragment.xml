@@ -5,29 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <!--<android.support.v7.widget.Toolbar-->
-        <!--android:id="@+id/add_toolbar"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:background="@color/colorPrimary">-->
-
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_centerVertical="true"-->
-            <!--android:textSize="20sp"-->
-            <!--android:text="Add A Restaurant"-->
-            <!--android:textColor="@color/colorPrimaryDark"/>-->
-
-
-    <!--</android.support.v7.widget.Toolbar>-->
-
-
-    <!--<include layout="@layout/my_toolbar"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent" />-->
-
-
 
     <ScrollView
         android:id="@+id/scrollView3"
@@ -71,6 +48,7 @@
                 android:id="@+id/restaurantNameEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:maxLines="1"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="111dp"
@@ -86,18 +64,31 @@
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/restaurantNameEditText"
                 android:ems="10"
-                android:hint="Restaurant Location (REQUIRED FIELD)"
+                android:maxLines="1"
+                android:hint="Street number Name, Zip code (REQUIRED FIELD)"
                 android:inputType="textPersonName"
                 android:paddingLeft="5dp" />
+
+            <EditText
+                android:id="@+id/add_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/addAddressEditText"
+                android:ems="10"
+                android:maxLines="1"
+                android:hint="Phone"
+                android:inputType="textPersonName"
+                android:paddingLeft="5dp"/>
 
             <TextView
                 android:id="@+id/priceRangeLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/ratingLabel"
-                android:layout_alignBottom="@+id/ratingLabel"
+                android:layout_below="@id/add_phone"
                 android:layout_alignParentStart="true"
-                android:layout_marginStart="13dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
                 android:paddingLeft="5dp"
                 android:text="Price Range"
                 android:textColor="@android:color/black"
@@ -107,8 +98,8 @@
                 android:id="@+id/priceSelector"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/addAddressEditText"
-                android:layout_marginTop="54dp"
+                android:layout_below="@+id/priceRangeLabel"
+                android:layout_marginTop="20dp"
                 android:layout_toEndOf="@+id/filters_button" />
 
             <TextView
@@ -116,6 +107,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/ratingBar"
+                android:layout_below="@id/add_phone"
                 android:layout_alignStart="@+id/ratingBar"
                 android:layout_marginBottom="11dp"
                 android:layout_marginStart="17dp"
@@ -158,6 +150,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/filters_button"
                 android:ems="10"
+                android:maxLines="1"
                 android:hint="Item Name"
                 android:inputType="textPersonName"
                 android:paddingLeft="5dp"
@@ -169,6 +162,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/itemNameText"
                 android:hint="Item Descrition"
+                android:maxLines="1"
                 android:textSize="20sp" />
 
             <Button

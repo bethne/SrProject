@@ -3,6 +3,7 @@ package com.example.bethn.gfree_srproj;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -34,12 +35,15 @@ public class AddFragment extends Fragment {
     private Button filtersListButton;
     private RestaurantDataProvider restaurantDataProvider;
     private Toolbar toolbar;
+    private EditText phone;
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.add_restaurant_fragment, container, false);
+
+        this.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         restaurantDataProvider = AppSession.getInstance().getRestaurantDataProvider();
 
@@ -54,6 +58,7 @@ public class AddFragment extends Fragment {
         seperateMenu = (CheckBox) view.findViewById(R.id.seperateMenuCheckBox);
         itemName = (EditText) view.findViewById(R.id.itemNameText);
         filtersListButton = (Button) view.findViewById(R.id.filters_button);
+        phone = (EditText) view.findViewById(R.id.add_phone);
 
         //NEEDS TO BE ABLE TO SELECT MULTIPLE FILTERS
         //use alert box to display checkbox listview
@@ -116,10 +121,10 @@ public class AddFragment extends Fragment {
         Restaurant newRestaurant = new Restaurant();
         newRestaurant.setName(restaurantName.getText().toString());
         newRestaurant.setAddress(restaurantAddress.getText().toString());
-        newRestaurant.setPhone("123-234-4521");
-        newRestaurant.setFoodType(FoodType.FASTFOOD);
-        newRestaurant.setType("type");
-        newRestaurant.setPriceRange(PriceRange.$);
+        newRestaurant.setPhone(phone.getText().toString());
+       // newRestaurant.setFoodType(FoodType.FASTFOOD);
+       // newRestaurant.setType("type");
+        newRestaurant.setPriceRange(PriceRange.valueOf(priceSelector.getSelectedItem().toString()));
         List<Item> menu = new ArrayList<>();
         Item fakemenu = new Item("chicken nuggets", "nuggets of chicken",
                 7.95, MenuSection.ENTREE, false);
