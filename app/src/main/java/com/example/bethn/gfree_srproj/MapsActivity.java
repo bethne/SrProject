@@ -21,7 +21,9 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
     public final static String MAP_ZIP = "MAP_ZIP";
@@ -30,6 +32,8 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
     private Address address;
     private Geocoder geocoder;
     private Button listViewButton;
+    private Button homeButton;
+    private Marker previouslySelected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +56,16 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
             e.printStackTrace();
         }
 
-        listViewButton = (Button) findViewById(R.id.list_view_button);
+        final Intent intent = new Intent(this, MainActivity.class);
+        homeButton = (Button) findViewById(R.id.home_button);
+        homeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(intent);
+            }
+        });
 
+        listViewButton = (Button) findViewById(R.id.list_view_button);
         listViewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,11 +128,27 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
                         Address curAddress = addresses.get(0);
                         LatLng latLng = new LatLng(curAddress.getLatitude(), curAddress.getLongitude());
                         //markers should be pulled from the database
-                        mMap.addMarker(new MarkerOptions().position(latLng).title(restaurant.getName()));
+                        MarkerOptions markerOptions = new MarkerOptions();
+                        markerOptions.position(latLng);
+                        markerOptions.title(restaurant.getName());
+                        Marker marker = mMap.addMarker(markerOptions);
+                        previouslySelected = marker;
+                        marker.showInfoWindow();
+                        marker.setTag(restaurant);
 
                         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                             @Override
                             public boolean onMarkerClick(Marker marker) {
+                                if (marker.equals(previouslySelected)) {
+                                    Restaurant selectedRestaurant = (Restaurant) marker.getTag();
+
+                                    Intent intent = new Intent(MapsActivity.this, RestaurantInfoActivity.class);
+                                    intent.putExtra(RestaurantInfoActivity.RESTAURANT_SELECTED, selectedRestaurant);
+                                    startActivity(intent);
+
+                                }
+                                previouslySelected = marker;
+
                                 return false;
                             }
                         });

@@ -16,6 +16,7 @@ public class Restaurant implements Parcelable{
     private String phone;
     private String type;
     private String hours;
+    private String rating;
     private PriceRange priceRange;
     private List<String> filters;
     private FoodType foodType;
@@ -24,12 +25,13 @@ public class Restaurant implements Parcelable{
     public Restaurant() {
     }
 
-    public Restaurant(String name, String address, String phone, String type, String hours, PriceRange priceRange, FoodType foodType, List<Item> menu) {
+    public Restaurant(String name, String address, String phone, String type, String hours, String rating, PriceRange priceRange, FoodType foodType, List<Item> menu) {
         this.name = name;
         this.address = address;
         this.phone = phone;
         this.type = type;
         this.hours = hours;
+        this.rating = rating;
         this.priceRange = priceRange;
         this.foodType = foodType;
         this.menu = menu;
@@ -82,6 +84,14 @@ public class Restaurant implements Parcelable{
         this.hours = hours;
     }
 
+    public String getRating() {
+        return rating;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
+
     public PriceRange getPriceRange() {
         return priceRange;
     }
@@ -120,6 +130,7 @@ public class Restaurant implements Parcelable{
         phone = in.readString();
         type = in.readString();
         hours = in.readString();
+        rating = in.readString();
         priceRange = (PriceRange) in.readValue(PriceRange.class.getClassLoader());
         if (in.readByte() == 0x01) {
             filters = new ArrayList<String>();
@@ -143,6 +154,7 @@ public class Restaurant implements Parcelable{
         dest.writeString(phone);
         dest.writeString(type);
         dest.writeString(hours);
+        dest.writeString(rating);
         dest.writeValue(priceRange);
         if (filters == null) {
             dest.writeByte((byte) (0x00));

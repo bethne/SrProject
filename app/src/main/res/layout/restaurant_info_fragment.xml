@@ -15,6 +15,7 @@
 
             <TextView
                 android:id="@+id/restaurant_name"
+                android:text="Name"
                 android:textColor="@color/colorPrimaryDark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -43,12 +44,20 @@
                 android:textSize="25sp"/>
 
             <TextView
-                android:id="@+id/restaurant_info_hours"
+                android:id="@+id/restaurant_hours_label"
                 android:text="Hours"
                 android:textColor="@color/colorPrimaryDark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="25sp"/>
+
+            <TextView
+                android:id="@+id/restaurant_info_hours"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="list hours here"
+                android:textColor="@android:color/background_dark"
+                android:textSize="23sp" />
 
             <TextView
                 android:id="@+id/categories_label"

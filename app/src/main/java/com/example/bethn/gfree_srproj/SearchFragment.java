@@ -49,17 +49,6 @@ public class SearchFragment extends Fragment implements RestaurantAdapter.Restau
         rAdapter.setRestaurants(fullList);
         searchResults.setAdapter(rAdapter);
 
-//        Button mapButton = (Button) view.findViewById(R.id.mapButton);
-//        mapButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                Intent intent = new Intent(SearchFragment.this.getActivity(),MapsActivity.class);
-//                startActivity(intent);
-//
-//            }
-//        });
-
 
         searchBox.addTextChangedListener(new TextWatcher() {
             @Override
@@ -83,17 +72,6 @@ public class SearchFragment extends Fragment implements RestaurantAdapter.Restau
 
             @Override
             public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        searchResults.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-//               Intent intent = new Intent(SearchFragment.this.getActivity(),RestaurantInfoActivity.class);
-//               // intent.putExtra("info", clicked);
-//                startActivity(intent);
 
             }
         });

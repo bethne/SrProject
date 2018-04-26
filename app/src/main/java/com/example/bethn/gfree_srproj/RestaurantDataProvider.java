@@ -25,7 +25,7 @@ public class RestaurantDataProvider {
 
     public RestaurantDataProvider() {
         dbRef = (DatabaseReference) FirebaseDatabase.getInstance().getReference(RESTAURANTS_REF);
-        restaurants = getRestaurantsFromDatabase();
+        getRestaurantsFromDatabase();
     }
 
     public String getNewCond()
@@ -38,22 +38,21 @@ public class RestaurantDataProvider {
         newCond = cond;
     }
 
-    private List<Restaurant> getRestaurantsFromDatabase() {
-        final List<Restaurant> restaurantList = new ArrayList<>();
+    private void getRestaurantsFromDatabase() {
 
         //issue because only called on data change
 
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
+                    restaurants = new ArrayList<>();
                  //to emulate a datachange
 //                String cond = dataSnapshot.child("condition").getValue().toString();
 //                setNewCondition(cond);
 //                textbox.setText(fobject.getNewCondition());
 
                 for (DataSnapshot restaurantSnap : dataSnapshot.getChildren()) {
-                    restaurantList.add(restaurantSnap.getValue(Restaurant.class));
+                    restaurants.add(restaurantSnap.getValue(Restaurant.class));
                 }
             }
 
@@ -62,8 +61,6 @@ public class RestaurantDataProvider {
 
             }
         });
-
-        return restaurantList;
     }
 
     public void addRestaurantToDatabase(Restaurant restaurant){

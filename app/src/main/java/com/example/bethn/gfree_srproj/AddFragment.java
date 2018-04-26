@@ -27,6 +27,7 @@ public class AddFragment extends Fragment {
     private EditText restaurantName;
     private EditText restaurantAddress;
     private Spinner ratingBar;
+    private EditText hours;
     private Spinner priceSelector;
     private CheckBox seperateMenu;
     private EditText itemName;
@@ -34,7 +35,6 @@ public class AddFragment extends Fragment {
     private FiltersDataProvider filtersData;
     private Button filtersListButton;
     private RestaurantDataProvider restaurantDataProvider;
-    private Toolbar toolbar;
     private EditText phone;
 
 
@@ -47,10 +47,6 @@ public class AddFragment extends Fragment {
 
         restaurantDataProvider = AppSession.getInstance().getRestaurantDataProvider();
 
-        toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-
-        //setActionBar(toolbar);
-
         restaurantName = (EditText) view.findViewById(R.id.restaurantNameEditText);
         restaurantAddress = (EditText) view.findViewById(R.id.addAddressEditText);
         ratingBar = (Spinner) view.findViewById(R.id.ratingBar);
@@ -59,15 +55,17 @@ public class AddFragment extends Fragment {
         itemName = (EditText) view.findViewById(R.id.itemNameText);
         filtersListButton = (Button) view.findViewById(R.id.filters_button);
         phone = (EditText) view.findViewById(R.id.add_phone);
+        hours = (EditText) view.findViewById(R.id.add_hours);
 
-        //NEEDS TO BE ABLE TO SELECT MULTIPLE FILTERS
-        //use alert box to display checkbox listview
+        //FiltersDataProvider filtersData..contains string and check value
+        //filtersData = AppSession.getInstance().getFiltersDataProvider();
         filtersData = new FiltersDataProvider();
         filtersData.reset();
         final List<Filters> filtersList = new ArrayList<>();
         for(Filters filter : filtersData.getFilters()){
             filtersList.add(filter);
         }
+
 
         //ArrayAdapter fAdapter = new ArrayAdapter<String>(getActivity(),R.layout.checked_textview, filtersList);
         filtersListButton.setOnClickListener(new View.OnClickListener() {
@@ -77,6 +75,14 @@ public class AddFragment extends Fragment {
                 dialogFragment.show(getFragmentManager(),MyDialogFragment.class.getName());
             }
         });
+
+//        final List<Filters> selectedFilters = new ArrayList<>();
+//
+//        for(Filters filter : filtersData.getFilters()){
+//            filter.toggleChecked();
+//            selectedFilters.add(filter);
+//        }
+
 
         List<String> pRL = new ArrayList<String>();
         for (PriceRange range : PriceRange.values()) {
@@ -106,6 +112,8 @@ public class AddFragment extends Fragment {
                     //add restaurant info from createRestaurant to restaurantList
                     restaurantDataProvider.addRestaurantToDatabase(createRestaurant());
 
+                    AppSession.getInstance().getFiltersDataProvider().reset();
+
                     //go back to home screen
                     startActivity(new Intent(AddFragment.this.getActivity(), MainActivity.class));
                 }
@@ -122,22 +130,25 @@ public class AddFragment extends Fragment {
         newRestaurant.setName(restaurantName.getText().toString());
         newRestaurant.setAddress(restaurantAddress.getText().toString());
         newRestaurant.setPhone(phone.getText().toString());
-       // newRestaurant.setFoodType(FoodType.FASTFOOD);
-       // newRestaurant.setType("type");
+        newRestaurant.setHours(hours.getText().toString());
         newRestaurant.setPriceRange(PriceRange.valueOf(priceSelector.getSelectedItem().toString()));
+        newRestaurant.setRating(ratingBar.getSelectedItem().toString());
+
+
         List<Item> menu = new ArrayList<>();
         Item fakemenu = new Item("chicken nuggets", "nuggets of chicken",
                 7.95, MenuSection.ENTREE, false);
         menu.add(fakemenu);
         newRestaurant.setMenu(menu);
 
-        List<String> filters = new ArrayList<>();
-        for (Filters curFilter : filtersData.getFilters()) {
-            filters.add(curFilter.getName());
+        List<Filters> locFilters = AppSession.getInstance().getFiltersDataProvider().getFilters();
+        List<String> filtersforDB = new ArrayList<>();
+        for (Filters curFilter : locFilters) {
+            if (curFilter.isChecked()) {
+                filtersforDB.add(curFilter.getName().toString());
+            }
         }
-
-        newRestaurant.setFilters(filters);
-
+        newRestaurant.setFilters(filtersforDB);
         return newRestaurant;
     }
 

@@ -32,8 +32,6 @@ public class AddActivity extends BaseActivity {
             }
         });
 
-        android.support.v7.widget.Toolbar  toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.add_restaurant_fragment_container, new AddFragment(), AddFragment.class.getName());

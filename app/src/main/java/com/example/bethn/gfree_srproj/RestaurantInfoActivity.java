@@ -14,6 +14,7 @@ import android.widget.Button;
 
 public class RestaurantInfoActivity extends BaseActivity {
     private Button homeButton;
+
     public static final String RESTAURANT_SELECTED = "RESTAURANT_SELECTED";
 
     @Override

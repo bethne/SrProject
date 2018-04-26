@@ -25,6 +25,10 @@ public class FiltersDataProvider {
         filtersList.add(new Filters("Mexican", false));
         filtersList.add(new Filters("Lunch", false));
         filtersList.add(new Filters("Fast Food", false));
+        filtersList.add(new Filters("Italian", false));
+        filtersList.add(new Filters("Pizza", false));
+        filtersList.add(new Filters("Dinner", false));
+        filtersList.add(new Filters("Burgers", false));
         return  filtersList;
     }
 
