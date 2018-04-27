@@ -45,8 +45,8 @@ public class MainFragment extends Fragment {
 
         currLocSearch = (RadioButton) view.findViewById(R.id.searchCurrLocRadioButton);
         zipSearch = (RadioButton) view.findViewById(R.id.searchZipRadioButton);
-        currLocAdd = (RadioButton) view.findViewById(R.id.addCurrLocRadioButton);
-        byNameAdd = (RadioButton) view.findViewById(R.id.addByNameRadioButton);
+        //currLocAdd = (RadioButton) view.findViewById(R.id.addCurrLocRadioButton);
+        //byNameAdd = (RadioButton) view.findViewById(R.id.addByNameRadioButton);
         zipSearchLoc = (EditText) view.findViewById(R.id.zipSearchEditText);
         nameAddLoc = (EditText) view.findViewById(R.id.nameAddLocEditText);
 
@@ -86,36 +86,36 @@ public class MainFragment extends Fragment {
         });
 
         final Button addButton = (Button) view.findViewById(R.id.addButton);
-        addButton.setEnabled(false);
+        //addButton.setEnabled(false);
         final Button searchButton = (Button) view.findViewById(R.id.searchButton);
         searchButton.setEnabled(false);
-        nameAddLoc.setEnabled(false);
+        //nameAddLoc.setEnabled(false);
         zipSearchLoc.setEnabled(false);
 
-        addRg =(RadioGroup) view.findViewById(R.id.add_radio_group);
+       // addRg =(RadioGroup) view.findViewById(R.id.add_radio_group);
         searchRg = (RadioGroup) view.findViewById(R.id.search_radio_group);
 
-        addRg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if(byNameAdd.isChecked()){
-                    nameAddLoc.setEnabled(false);
-                    nameAddLoc.setHint("Restaurant Name");
-                    nameAddLoc.setEnabled(true);
-                    AppSession.getInstance().setName(nameAddLoc.getText().toString());
-                   //onTextChange to enable addbutton
-                }
-                else{
-                    nameAddLoc.setEnabled(false);
-                    nameAddLoc.setHint("");
-                    addButton.setEnabled(true);
-                }
-               // if(nameAddLoc.getText().length() != 0){
-                 //   EditText restaurantName = (EditText) addView.findViewById(R.id.restaurantNameEditText);
-                 //   restaurantName.setText("this works");
-               // }
-            }
-        });
+//        addRg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(RadioGroup group, int checkedId) {
+//                if(byNameAdd.isChecked()){
+//                    nameAddLoc.setEnabled(false);
+//                    nameAddLoc.setHint("Restaurant Name");
+//                    nameAddLoc.setEnabled(true);
+//                    AppSession.getInstance().setName(nameAddLoc.getText().toString());
+//                   //onTextChange to enable addbutton
+//                }
+//                else{
+//                    nameAddLoc.setEnabled(false);
+//                    nameAddLoc.setHint("");
+//                    addButton.setEnabled(true);
+//                }
+//               // if(nameAddLoc.getText().length() != 0){
+//                 //   EditText restaurantName = (EditText) addView.findViewById(R.id.restaurantNameEditText);
+//                 //   restaurantName.setText("this works");
+//               // }
+//            }
+//        });
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override

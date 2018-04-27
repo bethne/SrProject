@@ -89,3 +89,6 @@ public class SearchFragment extends Fragment implements RestaurantAdapter.Restau
         startActivity(intent);
     }
 }
+
+
+

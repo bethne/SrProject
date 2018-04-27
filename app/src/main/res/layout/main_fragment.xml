@@ -127,7 +127,7 @@
                 android:clickable="true"
                 android:onClick="clickHandler"
                 android:paddingTop="5dp"
-                android:text=" ADD A RESTAURANT/ITEM"
+                android:text="ADD A RESTAURANT"
                 android:textAlignment="center"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="25sp" />
@@ -141,35 +141,50 @@
                 android:layout_marginRight="15dp"
                 android:orientation="vertical">
 
-                <RadioGroup
-                    android:id="@+id/add_radio_group"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                <!--<RadioGroup-->
+                    <!--android:id="@+id/add_radio_group"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent">-->
 
-                    <RadioButton
-                        android:id="@+id/addCurrLocRadioButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Use Current Location"
-                        android:textSize="15sp" />
+                    <!--<RadioButton-->
+                        <!--android:id="@+id/addCurrLocRadioButton"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:text="Use Current Location"-->
+                        <!--android:textSize="15sp" />-->
 
-                    <RadioButton
-                        android:id="@+id/addByNameRadioButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Add By Name: "
-                        android:textSize="15sp" />
+                    <!--<RadioButton-->
+                        <!--android:id="@+id/addByNameRadioButton"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:text="Add By Name: "-->
+                        <!--android:textSize="15sp" />-->
 
-                    <EditText
-                        android:id="@+id/nameAddLocEditText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:maxLines="1"
-                        android:imeOptions="actionDone"
-                        />
-                </RadioGroup>
+                    <!--<EditText-->
+                        <!--android:id="@+id/nameAddLocEditText"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:maxLines="1"-->
+                        <!--android:imeOptions="actionDone"-->
+                        <!--/>-->
+                <!--</RadioGroup>-->
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="5dp"
+                    android:text="Add Restaurant By Name: "
+                    android:textColor="@android:color/background_dark" />
+
+                <EditText
+                android:id="@+id/nameAddLocEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:imeOptions="actionDone"
+                />
 
                 <Button
                     android:id="@+id/addButton"

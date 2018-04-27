@@ -66,3 +66,5 @@ public class RestaurantAdapter extends ArrayAdapter {
         public void restaurantSelected(Restaurant restaurant);
     }
 }
+
+

@@ -32,9 +32,11 @@ public class AddActivity extends BaseActivity {
             }
         });
 
-
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.add_restaurant_fragment_container, new AddFragment(), AddFragment.class.getName());
         fragmentTransaction.commit();
     }
 }
+
+
+
